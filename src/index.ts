@@ -1,10 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
-
-const typeDefs = gql`
-  type Query {
-    hello: String!
-  }
-`;
+import { ApolloServer } from 'apollo-server';
+import { typeDefs } from './schema';
 
 const resolvers = {
   Query: {
