@@ -1,15 +1,12 @@
 import { ApolloServer } from 'apollo-server';
 import { typeDefs } from './schema';
-
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
+import { Query } from './resolvers/Query';
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers: {
+    Query,
+  },
 });
 
 server.listen().then(({ url }) => {
