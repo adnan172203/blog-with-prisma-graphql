@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   type Query {
-    hello: String!
+    posts: [Post!]!
   }
 
   type Mutation {
@@ -16,7 +16,6 @@ export const typeDefs = gql`
     published: Boolean
     cteatedAt: String
     user: User
-    authorId: Int
   }
 
   type User {
