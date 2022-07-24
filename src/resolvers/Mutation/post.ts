@@ -50,8 +50,19 @@ export const postResolvers = {
   postUpdate: async (
     _: any,
     { post, postId }: { postId: number; post: PostArgs['post'] },
-    { prisma }: Context
+    { prisma, userInfo }: Context
   ): Promise<PostPayloadType> => {
+    if (!userInfo) {
+      return {
+        userErrors: [
+          {
+            message: 'Forbidden access (unauthenticated)',
+          },
+        ],
+        post: null,
+      };
+    }
+
     const { title, content } = post;
 
     if (!title && !content) {
