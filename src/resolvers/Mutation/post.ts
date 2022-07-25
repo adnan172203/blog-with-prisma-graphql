@@ -1,5 +1,6 @@
 import { Post, Prisma } from '@prisma/client';
 import { Context } from '../../index';
+import { canUserMutatePost } from '../../utils/canUserMutatePost';
 
 interface PostArgs {
   post: {
@@ -62,6 +63,14 @@ export const postResolvers = {
         post: null,
       };
     }
+
+    const error = await canUserMutatePost({
+      userId: userInfo.userId,
+      postId: Number(postId),
+      prisma,
+    });
+
+    if (error) return error;
 
     const { title, content } = post;
 
